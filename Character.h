@@ -2,7 +2,10 @@
 #define CHARACTER_H
 
 #include <string>
+#include <vector>
 #include "formulas.hpp"
+#include "Skill.h"
+#include "Skills.hpp"
 using namespace std;
 
 class Character {
@@ -21,6 +24,7 @@ protected:
     bool isAlive;
     bool isDefending;
     bool isMagic;
+    vector<Skill> skills;
 public:
     // Constructor / Destructor
     Character(string n,int l, float maxH,float h,float maxR,float r,float a,float d);

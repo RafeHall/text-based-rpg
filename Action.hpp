@@ -10,15 +10,16 @@ inline void action(Character* source,Character* target,Skill* skill) {
     // decrease resource
     source->setResource(source->getResource() - skill->getCost());
 
-    // compute points
-    float points = (skill->getDamageSkill()) ? computeAttackPoints(skill->getPoints(),source->getAtk(),target->getDef(),target->getIsDefending()) : computeRestorePoints(skill->getPoints(),source->getAtk());
-
     // perform action
+    float points;
+
     if (skill->getSkillType() == damageHp) { 
+        computeAttackPoints(skill->getPoints(),source->getAtk(),target->getDef(),target->getIsDefending());
         if (target->getHp() <= points) { target->setHp(0); }
         else { target->setHp(target->getHp() - points); }
     }
     else if (skill->getSkillType() == restoreHp) { 
+        computeRestorePoints(skill->getPoints(),source->getAtk());
         if (target->getMaxHp() < points) { target->setHp(target->getMaxHp()); }
         else { target->setHp(target->getHp() + points); }
     }

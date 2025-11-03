@@ -1,4 +1,5 @@
 #pragma once
 #include "Skill.h"
+#include "formulas.hpp"
 
-Skill baseAtk(false,true,false,10,0); // Normal Base Attack
+Skill baseAtk(false,damageHp,10,0); // Normal Base Attack

@@ -5,6 +5,10 @@ constexpr int damageHp = 1;
 constexpr int restoreHp = 2;
 constexpr int damageResource = 3;
 constexpr int restoreResource = 4;
+constexpr int buffAtk = 5;
+constexpr int debuffAtk = 6;
+constexpr int buffDef = 7;
+constexpr int debuffDef = 8;
 
 // Core Formulas
 inline constexpr float nextLevelFormula(int level) { return level * 125; }
@@ -13,7 +17,7 @@ inline constexpr float expDropBossFormula(int level) { return level * 103.7; }
 inline constexpr float computeAttackPoints(float basePoints,float sourceAtk,float targetDef,bool isDefending) { 
     (isDefending) ? (sourceAtk*0.2)*basePoints - targetDef*1.5 : (sourceAtk*0.2)*basePoints - targetDef; 
 }
-inline constexpr float computeRestorePoints(float basePoints,float sourceAtk) { return (sourceAtk*0.125)*basePoints; }
+inline constexpr float computeRestorePoints(float basePoints,float sourceAtk) { return (sourceAtk*0.125)*basePoints; } // NEEDS ADJUSTMENTS
 
 // Warrior
 inline constexpr float warriorHp(int level) { return 250 + level * 8; }

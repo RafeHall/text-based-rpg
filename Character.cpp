@@ -3,7 +3,9 @@
 
 // constructor
 Character::Character(string n, int l, float max, float h, float maxR, float r, float a, float d)
-    : name(n), level(l), maxHp(max), hp(h), maxResource(maxR), resource(r), atk(a), def(d), isAlive(true), isDefending(false), exp(0), nextLevel(nextLevelFormula(l)), expDrop(expDropFormula(l)), isMagic(false) {};
+    : name(n), level(l), maxHp(max), hp(h), maxResource(maxR), resource(r), atk(a), def(d), isAlive(true), isDefending(false), exp(0), nextLevel(nextLevelFormula(l)), expDrop(expDropFormula(l)), isMagic(false) {
+        skills.push_back(baseAtk);
+    };
 
 // destructor
 Character::~Character() {};
