@@ -7,9 +7,9 @@ class Boss : public Character {
 public:
     Boss(const string n,int lvl);
 
-    void setHp() override;
-    void setAtk() override;
-    void setDef() override;
+    void setHpStat() override;
+    void setAtkStat() override;
+    void setDefStat() override;
 };
 
 #endif

@@ -7,9 +7,9 @@ class Warrior : public Character {
 public:
     Warrior(const string& n,int lvl);
 
-    void setHp() override;
-    void setAtk() override;
-    void setDef() override;
+    void setHpStat() override;
+    void setAtkStat() override;
+    void setDefStat() override;
 };
 
 #endif

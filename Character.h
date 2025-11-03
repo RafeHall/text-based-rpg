@@ -14,14 +14,16 @@ protected:
     float expDrop;
     float maxHp;
     float hp;
+    float maxResource;
+    float resource;
     float atk;
     float def;
-    float isAlive;
-    float isDefending;
+    bool isAlive;
+    bool isDefending;
     bool isMagic;
 public:
     // Constructor / Destructor
-    Character(string n,int l, float maxH,float h,float a,float d);
+    Character(string n,int l, float maxH,float h,float maxR,float r,float a,float d);
 
     virtual ~Character();
 
@@ -33,19 +35,26 @@ public:
     float getExpDrop() const;
     float getMaxHp() const;
     float getHp() const;
+    float getMaxResource() const;
+    float getResource() const;
     float getAtk() const;
     float getDef() const;
+    bool getIsMagic() const;
     bool getIsAlive() const;
     bool getIsDefending() const;
 
     // setters
+    void setHp(float h);
+    void setResource(float r);
     void setIsAlive(bool b);
     void setIsDefending(bool b);
+    void setResource(float r);
 
     // set stats
-    virtual void setHp() = 0;
-    virtual void setAtk() = 0;
-    virtual void setDef() = 0;
+    virtual void setHpStat() = 0;
+    virtual void setAtkStat() = 0;
+    virtual void setDefStat() = 0;
+    virtual void setResourceStat() = 0;
 
     // take dmg
     virtual void takeDmg(float amount);

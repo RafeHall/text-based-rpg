@@ -2,8 +2,8 @@
 #include <iostream>
 
 // constructor
-Character::Character(string n, int l, float max, float h, float a, float d)
-    : name(n), level(l), maxHp(max), hp(h), atk(a), def(d), isAlive(true), isDefending(false), exp(0), nextLevel(nextLevelFormula(l)), expDrop(expDropFormula(l)), isMagic(false) {};
+Character::Character(string n, int l, float max, float h, float maxR, float r, float a, float d)
+    : name(n), level(l), maxHp(max), hp(h), maxResource(maxR), resource(r), atk(a), def(d), isAlive(true), isDefending(false), exp(0), nextLevel(nextLevelFormula(l)), expDrop(expDropFormula(l)), isMagic(false) {};
 
 // destructor
 Character::~Character() {};
@@ -16,14 +16,20 @@ float Character::getNextLevel() const { return nextLevel; }
 float Character::getExpDrop() const { return expDrop; }
 float Character::getMaxHp() const { return maxHp; }
 float Character::getHp() const { return hp; }
+float Character::getMaxResource() const { return maxResource; }
+float Character::getResource() const { return resource; }
 float Character::getAtk() const { return atk; }
 float Character::getDef() const { return def; }
+bool Character::getIsMagic() const { return isMagic; }
 bool Character::getIsAlive() const { return isAlive; }
 bool Character::getIsDefending() const { return isDefending; }
 
 // setters
+void Character::setHp(float h) { hp = h; }
+void Character::setResource(float r) { resource = r; }
 void Character::setIsAlive(bool b) { isAlive = b; }
 void Character::setIsDefending(bool b) { isDefending = b; }
+void Character::setResource(float r) { resource = r; }
 
 // take dmg
 void Character::takeDmg(float amount) {
@@ -81,9 +87,9 @@ void Character::reset() {
 
 void Character::levelUp() {
     level = level + 1;
-    this->setHp();
-    this->setAtk();
-    this->setDef();
+    this->setHpStat();
+    this->setAtkStat();
+    this->setDefStat();
 }
 
 void Character::canLevel(Character& target) {
