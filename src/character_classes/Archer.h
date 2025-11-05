@@ -1,11 +1,11 @@
-#ifndef BOSS_H
-#define BOSS_H
+#ifndef ARCHER_H
+#define ARCHER_H
 
-#include "Character.h"
+#include "character/Character.h"
 
-class Boss : public Character {
+class Archer : public Character {
 public:
-    Boss(const string& n,int lvl);
+    Archer (const string& n,int lvl);
 
     void setHpStat() override;
     void setResourceStat() override;

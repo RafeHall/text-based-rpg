@@ -2,11 +2,14 @@
 #define GAME_H
 
 #include <vector>
-#include "Character.h"
-#include "Warrior.h"
-#include "Enemy.h"
-#include "Boss.h"
-#include "Combat.h"
+#include "Character/Character.h"
+#include "character_classes/Warrior.h"
+#include "character_classes/Mage.h"
+#include "character_classes/Archer.h"
+#include "character_classes/Healer.h"
+#include "character_classes/Enemy.h"
+#include "character_classes/Boss.h"
+#include "combat/Combat.h"
 
 class Game {
 private:

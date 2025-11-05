@@ -1,11 +1,11 @@
-#ifndef ENEMY_H
-#define ENEMY_H
+#ifndef BOSS_H
+#define BOSS_H
 
-#include "Character.h"
+#include "character/Character.h"
 
-class Enemy : public Character {
+class Boss : public Character {
 public:
-    Enemy(const string& n,int lvl);
+    Boss(const string& n,int lvl);
 
     void setHpStat() override;
     void setResourceStat() override;

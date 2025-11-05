@@ -1,7 +1,7 @@
 #include "Character.h"
-#include "Skills.h"
-#include "BuffDef.h"
-#include "DamageHp.h"
+#include "skills/Skills.h"
+#include "skills/BuffDef.h"
+#include "skills/DamageHp.h"
 #include <iostream>
 
 // constructor

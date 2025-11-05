@@ -1,6 +1,6 @@
-#include "Skill.h"
+#include "skills/Skill.h"
 #include "Formulas.hpp"
-#include "Character.h"
+#include "character/Character.h"
 #include <iostream>
 
 Skill::Skill(bool magic, float p, float c)
