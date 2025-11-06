@@ -40,11 +40,12 @@ Skill& Combat::playerChoice() {
         int choice;
 
         if (choice > 0 && choice <= skillList.size()) { // valid choice | return picked skill
-            pickedSkill = skillList[choice];
-            return *pickedSkill;
-        }
+            pickedSkill = skillList[choice - 1]; // offset by 1
 
-        cout << "Invalid Option.\n";
+            if(pickedSkill->canUse(*player)) return *pickedSkill;
+            else { pickedSkill->cantUse(*player); }
+        }
+        else { cout << "Invalid Option.\n"; }
     }
 
     
@@ -68,8 +69,14 @@ Skill& Combat::playerChoice() {
 
 // enemy turn
 Skill& Combat::enemyChoice() {
+    vector<Skill*> skillList;
+    Skill* pickedSkill;
 
-    // TODO
+    while(true) {
+        int choice = (1 + rand() % 100) * skillList.size() / 100; // generate choice randomly
+        pickedSkill = skillList[choice];
+        if(pickedSkill->cantUse(*enemy)) {} // error?
+    }
 
 }
 
