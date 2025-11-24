@@ -1,5 +1,2 @@
-# ignore all the .o files that get made in compilation to avoid clutter
 *.o
-
-# ignore the compiled binary, also to reduce clutter
-./text_rpg.exe
+*.exe

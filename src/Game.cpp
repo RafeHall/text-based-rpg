@@ -1,7 +1,7 @@
 #include "Game.h"
 
 Game::Game()
-    : currentIndex(1) {
+    : currentIndex(0) {
 
     arena.emplace_back(createEnemyParty(1));
     arena.emplace_back(createEnemyParty(2));
