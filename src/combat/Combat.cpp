@@ -12,12 +12,12 @@ void Combat::printTurn() const {
     cout << "===== Turn: " << turnCount << " =====\n";
 }
 
-void Combat::endInfo(Party *winners,Party *losers) const {
+void Combat::endInfo(Party *winners) const {
     // cout << losers->getName() << " HAS FALLEN!" << endl;
     cout << "====================================" << endl;
     cout << "BATTLE HAS ENDED!" << endl;
     cout << "WINNERS: ";
-    for (int i = 0; i < winners->getPartySize(); i++) { cout << (*winners)[i]->getName() << " | "; } 
+    for (size_t i = 0; i < winners->getPartySize(); i++) { cout << (*winners)[i]->getName() << " | "; } 
     cout << endl;
     cout << "====================================" << endl << endl;
 
@@ -28,10 +28,12 @@ void Combat::endInfo(Party *winners,Party *losers) const {
 void Combat::battleStart() const {
     cout << "====================================" << endl;
     cout << "BATTLE HAS BEGUN!" << endl;
-    for (int i = 0; i < playerParty.getPartySize(); i++) { cout << playerParty[i]->getName() << " "; } 
+    // Print Player Party
+    for (size_t i = 0; i < playerParty.getPartySize(); i++) { cout << playerParty[i]->getName() << " "; } 
     cout << endl;
-    cout << "VS";
-    for (int i = 0; i < enemyParty.getPartySize(); i++) { cout << enemyParty[i]->getName() << " "; } 
+    cout << "VS\n";
+    // Print Enemy Party
+    for (size_t i = 0; i < enemyParty.getPartySize(); i++) { cout << enemyParty[i]->getName() << " "; } 
     cout << "====================================" << endl << endl;
 }
 
@@ -58,13 +60,13 @@ Character* Combat::getPlayerTarget(Character* source, Skill* skill) {
 
     while(true) {
         cout << "Choose your target: " << endl;
-        for (int i = 0; i < validTargets.size(); i++) {
+        for (size_t i = 0; i < validTargets.size(); i++) {
             cout << i+1 << ") " << validTargets[i]->getName()
                 << " | HP: " << validTargets[i]->getHp() << " / " << validTargets[i]->getMaxHp(); 
         }
         cout << ">";
 
-        int choice;
+        size_t choice;
         cin >> choice;
 
         if(choice > 0 && choice <= validTargets.size()) {
@@ -91,7 +93,7 @@ Skill* Combat::getPlayerSkill(Character* source) {
         cout << ">";
 
         // get player choice
-        int choice;
+        size_t choice;
         cin >> choice;
 
         if (choice > 0 && choice <= skillList.size()) { // valid choice | return picked skill
@@ -109,7 +111,7 @@ Character* Combat::getEnemyTarget(Character* source, Skill* skill) {
 
     // TODO - Make more sophisticated
     while(true) {
-        int choice = (rand() % 100) * validTargets.size() / 100; // generate choice randomly
+        size_t choice = (rand() % 100) * validTargets.size() / 100; // generate choice randomly
         return validTargets[choice];
     }
 }
@@ -146,7 +148,7 @@ void Combat::processTurn(Party player, Party enemy) {
     // TODO - reset or decrement status effect for player party
 
     // get choice from each player party member
-    for (int i = 0; i < player.getPartySize(); i++ ) {
+    for (size_t i = 0; i < player.getPartySize(); i++ ) {
         Skill* skill = getPlayerSkill(player[i]);
         Character* target = getPlayerTarget(player[i],skill);
         actionQueue.push(Action(player[i],target,skill));
@@ -166,14 +168,14 @@ void Combat::processTurn(Party player, Party enemy) {
     // TODO - reset or decrement status effect for enemy party
 
     // get choice from each player party member
-    for (int i = 0; i < enemy.getPartySize(); i++) {
+    for (size_t i = 0; i < enemy.getPartySize(); i++) {
         Skill* skill = getEnemySkill(enemy[i]);
         Character* target = getEnemyTarget(enemy[i],skill);
         actionQueue.push(Action(enemy[i],target,skill));
     }
 
     // perform actions
-    for (int i = 0; actionQueue.empty(); i++) {
+    for (size_t i = 0; actionQueue.empty(); i++) {
         performAction(
             actionQueue.front().source,
             actionQueue.front().target,
@@ -191,8 +193,11 @@ bool Combat::combatLoop() {
 
     battleStart();
 
+    cout << "==== Player Party =====\n";
     playerParty.printPartyInfo();
+    cout << "==== Enemy Party =====\n";
     enemyParty.printPartyInfo();
+    cout << endl;
 
     while(playerParty.getIsAlive() && enemyParty.getIsAlive()) {
         printTurn();
@@ -207,23 +212,23 @@ bool Combat::combatLoop() {
         loser = &enemyParty; 
 
         float expDropped;
-        for (int i = 0; i < loser->getPartySize(); i++) {
+        for (size_t i = 0; i < loser->getPartySize(); i++) {
             expDropped += (*loser)[i]->getExpDrop();
         }
 
         expDropped /= winner->getPartySize();
 
-        for (int i = 0; i < winner->getPartySize(); i++) {
+        for (size_t i = 0; i < winner->getPartySize(); i++) {
             (*winner)[i]->canLevel(expDropped);
         }
 
-        endInfo(winner,loser);
+        endInfo(winner);
         return true; 
     }
     else { 
         winner = &enemyParty; 
         loser = &playerParty; 
-        endInfo(winner,loser);
+        endInfo(winner);
         return false; 
     }
 }

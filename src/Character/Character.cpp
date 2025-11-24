@@ -79,11 +79,14 @@ void Character::canLevel(float xp) {
 // print info
 void Character::printInfo() const {
     cout << "===== " << name << " =====\n";
-    cout << "LEVEL: " << stats.level << " (" << exp << "exp / " << nextLevel << "exp)" << endl;
-    cout << "HP: " << stats.hp << " / " << stats.maxHp << endl;
-    cout << "ATK: " << stats.attack << endl;
-    cout << "DEF: " << stats.defense << endl;
-    cout << "STATUS: " << (isAlive ? "Alive" : "Dead") << endl;
+    cout << "LEVEL: " << stats.level << " (" << exp << "exp / " << nextLevel << "exp)" << " | ";
+    cout << "HP: " << stats.hp << " / " << stats.maxHp << " | ";
+    cout << "ATK: " << stats.attack << " | ";
+    cout << "DEF: " << stats.defense << " | ";
+    cout << "MAG: " << stats.magic << " | ";
+    cout << "RES: " << stats.resistance << " | ";
+    cout << "STATUS: " << (isAlive ? "Alive" : "Dead");
+    cout << endl;
 }
 
 void Character::printSkills() const {
