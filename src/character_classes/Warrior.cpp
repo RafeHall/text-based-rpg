@@ -11,6 +11,8 @@ Warrior::Warrior(const string& n,int level)
         stats.magic = warriorMagic(level);
         stats.resistance = warriorResistance(level);
 
+        isMagic = false;
+
         characterClass = ClassType::Warrior;
     };
 

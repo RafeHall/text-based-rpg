@@ -37,7 +37,7 @@ void Combat::battleStart() const {
     cout << endl << "====================================" << endl << endl;
 }
 
-void Combat::getValidTargets(Character* source, Skill* skill) {
+void Combat::getValidTargets(Character* source, Skill* skill, Party sourceParty, Party opposingParty) {
     validTargets.clear();
     
     switch (skill->getTargetType()) {
@@ -46,17 +46,22 @@ void Combat::getValidTargets(Character* source, Skill* skill) {
             break;
         case TargetType::ONE_ALLY:
         case TargetType::ALL_ALLIES:
-            validTargets = playerParty.getParty();
+            validTargets = sourceParty.getParty();
             break;
         case TargetType::ONE_ENEMY:
         case TargetType::ALL_ENEMIES:
-            validTargets = enemyParty.getParty();
+            validTargets = opposingParty.getParty();
             break;
+    }
+
+    for (auto it = validTargets.begin(); it != validTargets.end(); ) {
+        if (!(*it)->getIsAlive()) { it = validTargets.erase(it); }
+        else { it++; }
     }
 }
 
 Character* Combat::getPlayerTarget(Character* source, Skill* skill) {
-    getValidTargets(source, skill);
+    getValidTargets(source, skill,playerParty,enemyParty);
 
     while(true) {
         cout << "Choose your target: " << endl;
@@ -107,7 +112,7 @@ Skill* Combat::getPlayerSkill(Character* source) {
 }
 
 Character* Combat::getEnemyTarget(Character* source, Skill* skill) {
-    getValidTargets(source,skill);
+    getValidTargets(source,skill,enemyParty,playerParty);
 
     // TODO - Make more sophisticated
     while(true) {
@@ -130,14 +135,14 @@ Skill* Combat::getEnemySkill(Character* source) {
 }
 
 void Combat::performAction(Character* source, Character* target, Skill* skill) {
-    // check if character can use skill
-    skill->canUse(source);
-
     // decrease resource
     source->setResource(source->getResource() - skill->getCost());
     
     // use skill on target
     skill->useSkill(source,target);
+
+    // check if dead
+    if(target->getHp() <= 0) { target->setIsAlive(false); cout << target->getName() << " has fallen!\n"; }
 }
 
 void Combat::processTurn(Party player, Party enemy) {
@@ -155,7 +160,7 @@ void Combat::processTurn(Party player, Party enemy) {
     }
 
     // perform actions
-    for (int i = 0; actionQueue.empty(); i++) {
+    while(!actionQueue.empty()) {
         performAction(
             actionQueue.front().source,
             actionQueue.front().target,
@@ -175,7 +180,7 @@ void Combat::processTurn(Party player, Party enemy) {
     }
 
     // perform actions
-    for (size_t i = 0; actionQueue.empty(); i++) {
+    while(!actionQueue.empty()) {
         performAction(
             actionQueue.front().source,
             actionQueue.front().target,
@@ -183,6 +188,7 @@ void Combat::processTurn(Party player, Party enemy) {
         );
         actionQueue.pop();
     }
+
 
 }
 
