@@ -12,7 +12,6 @@ Character* Party::operator[](int index) const {
 size_t Party::getPartySize() const { return party.size(); }
 
 void Party::printPartyInfo() const {
-    cout << "test" << endl;
     for (size_t i = 0; i < party.size(); i++) {
         party[i]->printInfo();
     }

@@ -10,6 +10,8 @@
 
 using namespace std;
 
+// TODO - Store Character Class Type in Character (for printing info)
+
 class Character {
 protected:
     string name;

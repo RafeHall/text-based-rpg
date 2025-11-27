@@ -15,7 +15,7 @@ struct Combat {
     Combat(Party player, Party enemy);
 
     void printTurn() const;
-    void endInfo(Party *winner, Party *loser) const;
+    void endInfo(Party *winner) const;
     void battleStart() const;
 
     void getValidTargets(Character* source, Skill* skill);
