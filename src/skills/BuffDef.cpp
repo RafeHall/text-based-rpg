@@ -1,11 +1,14 @@
 #include "BuffDef.h"
 #include "../character/Character.h"
 
-BuffDef::BuffDef(bool magic, float p, float c, TargetType tt)
-    : Skill(magic,p,c,tt) {}
+BuffDef::BuffDef(std::string n, bool magic, float p, float c, TargetType tt)
+    : Skill(n,magic,p,c,tt) {}
 
 void BuffDef::useSkill(Character* source, Character* target) {
-    if (!canUse(source)) return;
+    float statPoints;
 
-    target->setDefense(target->getDef() + points * (source->getLevel() * 0.5));
+    statPoints = target->getDef() + points * (source->getLevel() * 0.5);
+
+    target->setDefense(statPoints);
+    cout << target->getName() << "'s defense was raised by " << statPoints << "!\n";
 }
