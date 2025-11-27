@@ -6,15 +6,12 @@
 int main() {
     srand(time(0));
 
-    cout << "===== WELCOME =====" << endl;
+    cout << "===== WELCOME =====\n\n";
 
-    // TODO - Prompt for Class
-
-    string playerName;
-    cout << "Player Name: ";
-    cin >> playerName;
-
-    Game game(playerName);
+    Game game;
+    
+    game.createPlayerParty();
     game.gameLoop();
+
     return 0;
 }

@@ -1,15 +1,16 @@
 #include "DamageHp.h"
 #include "../character/Character.h"
 
-DamageHp::DamageHp(bool magic,float p, float c, TargetType tt)
-    : Skill(magic,p,c,tt) {}
+DamageHp::DamageHp(std::string n, bool magic,float p, float c, TargetType tt)
+    : Skill(n,magic,p,c,tt) {}
 
 void DamageHp::useSkill(Character* source, Character* target) {
-    if (!canUse(source)) return;
-
     float dmgStat = (isMagic) ? source->getMagic() : source->getAtk();
+    float dmgPoints;
 
-    if (target->getIsDefending()) { target->setHp((dmgStat*0.2)*points - target->getDef()*1.5); }
+    dmgPoints = target->getIsDefending() ? (dmgStat*0.2) * points - target->getDef()*1.5 : (dmgStat*0.2) * points - target->getDef();
 
-    target->setHp((dmgStat*0.2)*points - target->getDef());
+    target->setHp(target->getHp() - dmgPoints);
+    if (target->getHp() < 0) { target->setHp(0); }
+    cout << target->getName() << " lost " << dmgPoints << " HP!\n";
 }

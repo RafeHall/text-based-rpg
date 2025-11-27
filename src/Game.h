@@ -15,14 +15,22 @@
 class Game {
 private:
     Party playerParty;
+    Party bossParty;
     vector<Party> arena;
     int currentIndex;
 public:
-    Game(vector<Character*> party);
+    Game();
     ~Game();
 
+    static Game& getInstance();
+
     vector<Character*> createEnemyParty(int level);
-    vector<Character*> createPlayerParty();
+    
+    void createPlayerParty();
+
+    void printMenu() const;
+
+    void clearConsole() const;
 
     void gameLoop();
 };

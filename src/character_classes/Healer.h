@@ -1,7 +1,7 @@
 #ifndef HEALER_H
 #define HEALER_H
 
-#include "Character/Character.h"
+#include "../character/Character.h"
 
 class Healer : public Character {
 public:
@@ -13,6 +13,8 @@ public:
     void setDefStat() override;
     void setMagicStat() override;
     void setResistanceStat() override;
+
+    void printClass() const override;
 };
 
 #endif

@@ -15,10 +15,10 @@ struct Combat {
     Combat(Party player, Party enemy);
 
     void printTurn() const;
-    void endInfo(Party *winner, Party *loser) const;
+    void endInfo(Party *winner) const;
     void battleStart() const;
 
-    void getValidTargets(Character* source, Skill* skill);
+    void getValidTargets(Character* source, Skill* skill, Party sourceParty, Party opposingParty);
 
     Character* getPlayerTarget(Character* source, Skill* skill);
     Skill* getPlayerSkill(Character* source);
